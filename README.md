@@ -1,7 +1,6 @@
 
 ###### Q U I C K L I N K S
 [![fluttercapsule](https://img.shields.io/badge/Contribute-Now-211F1F?logo=GitHub&logoColor=ffffff)](https://github.com/GetIbetsamAhmed/Flutter-Capsule/blob/main/README.md) 
-![Flutter](https://i.imgur.com/e9V2Zf7.jpg)
 [![HEALTH](https://img.shields.io/badge/FLUTTER-HEALTH_STATUS-64DD17)](#flutter-health-status) [![Ibtesam Ahmed](https://img.shields.io/badge/FLUTTER-CREATE-304FFE)](#create-app) [![Ibtesam Ahmed](https://img.shields.io/badge/FLUTTER-RUN-2962FF)](#run-app)
 
 ## Flutter Health Status
@@ -67,4 +66,51 @@ _Run this command to run the flutter web project on specific port of localhost_
 _Sample: `flutter run -d chrome --web-hostname localhost --web-port 8080` to run flutter web project on port `localhost:8080` on Web Browser_ 
 ```dart
 flutter run -d chrome --web-hostname localhost --web-port [port_number]
+```
+[![TOP](https://img.shields.io/badge/Goto-Top-000000)](#q-u-i-c-k-l-i-n-k-s)
+## Signing App
+### Step 1
+**Create a keystore**
+If you have an existing keystore, skip to the next step. If not, create one by running the following at the command line:
+```bash
+./keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+**OR** _Run this if get error_
+```bash
+.\keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+**Note:** Keep this file private; do not check it into public source control. 
+**Note:** keytool may not be in your path. It is part of the `Java JDK`, which is installed as part of Android Studio. For the concrete path, run `flutter doctor -v` and see the path printed after `Java binary at:` and then use that fully qualified path replacing java with keytool.
+
+### Step 2
+Reference the keystore from the app Create a file named **key.properties**`<Project>/android/key.properties` that contains a reference to your keystore: 
+Add these lines in `/android/key.properties`
+```properties
+storePassword= password from previous step
+keyPassword= password from previous step
+keyAlias= key
+storeFile= location of the key store file, e.g. /Users/username/key.jks
+```
+### Step 3
+_Add these lines above android{ } (near line 16) in `/android/app/build.gradle`_
+```gradle
+def keystorePropertiesFile = rootProject.file("key.properties") 
+def keystoreProperties = new Properties() 
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile)) 
+```
+_Add these lines in android{ }  in `/android/app/build.gradle`_
+```
+signingConfigs { 
+	release { 
+	keyAlias keystoreProperties['keyAlias']
+	keyPassword keystoreProperties['keyPassword']
+	storeFile file(keystoreProperties['storeFile'])
+	storePassword keystoreProperties['storePassword'] 
+	} 
+} 
+buildTypes { 
+	release { 
+	signingConfig signingConfigs.release 
+	} 
+}
 ```
