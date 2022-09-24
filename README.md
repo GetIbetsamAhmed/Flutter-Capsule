@@ -119,12 +119,21 @@ We can add a new font through assets in this application
 ```bash
 Add font .ttf in your font folder inside the assest 
 ```
-#### Specify Package Name
-_Create your Flutter app with this command to customize your app's package name; Package name from the below command will be_ `com.company.app_name` _You can change it accordingly_ 
+#### Add font into pubspec.yaml
+Add your font in pubspec.yaml i.e
 ```bash
-flutter create --org com.company app_name
+fonts:
+    - family: Plus Jakarta #default font family
+      fonts:
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Regular.otf
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Medium.otf
+          weight: 500
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
+          weight: 700
 ```
-#### Create Command for Release
+#### Use font locally
 ```bash
-flutter create --androidx -t app --org com.company -a kotlin -i swift app_name
+const Text("Information" , style: TextStyle(
+fontFamily: 'Plus Jakarta'
+));
 ```
