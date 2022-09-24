@@ -114,3 +114,17 @@ buildTypes {
 	} 
 }
 ```
+## Add Font
+We can add a new font through assets in this application
+```bash
+Add font .ttf in your font folder inside the assest 
+```
+#### Specify Package Name
+_Create your Flutter app with this command to customize your app's package name; Package name from the below command will be_ `com.company.app_name` _You can change it accordingly_ 
+```bash
+flutter create --org com.company app_name
+```
+#### Create Command for Release
+```bash
+flutter create --androidx -t app --org com.company -a kotlin -i swift app_name
+```
