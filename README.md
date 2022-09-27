@@ -131,7 +131,7 @@ fonts:
         - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
           weight: 700
 ```
-#### Use font locally
+#### Use font locally through your assets
 ```bash
 const Text("Information" , style: TextStyle(
 fontFamily: 'Plus Jakarta'
