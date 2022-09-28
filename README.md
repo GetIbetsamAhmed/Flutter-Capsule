@@ -114,7 +114,7 @@ buildTypes {
 	} 
 }
 ```
-## Add Font
+## Add Font through assets
 We can add a new font through assets in this application
 ```bash
 Add font .ttf in your font folder inside the assest 
